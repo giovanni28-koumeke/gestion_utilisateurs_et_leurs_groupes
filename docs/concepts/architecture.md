@@ -95,6 +95,22 @@ The actual code confirms this layered flow:
 - persistence operations are implemented under `src/dao`
 - entity mappings are implemented under `src/entite`
 
+## Mermaid architecture view
+
+```mermaid
+flowchart TD
+    A[Swing UI] --> B[Controller]
+    B --> C[Service]
+    C --> D[DAO]
+    D --> E[JPA EntityManager]
+    E --> F[(PostgreSQL)]
+
+    G[Utilisateur Entity] --> D
+    H[Groupe Entity] --> D
+```
+
+This diagram reflects the implementation visible in the project structure and confirms the desktop flow used by the application.
+
 ## Important note
 
 The project is a teaching example, so the separation is intentionally simple and not fully production-optimized.

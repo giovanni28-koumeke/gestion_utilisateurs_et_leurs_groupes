@@ -68,4 +68,6 @@ The service classes expose corresponding methods such as:
 
 ## Important note
 
+This project is a desktop Java Swing application and does not expose a REST API or HTTP endpoints. The reference above documents the real application operations implemented in the codebase, not a hypothetical HTTP interface.
+
 Some service methods are currently only partially implemented and may return `null` or remain empty. The reference above describes only the operations that exist in the real codebase.

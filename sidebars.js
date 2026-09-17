@@ -42,8 +42,10 @@ module.exports = {
         'developer-guide/project-structure',
         'developer-guide/persistence',
         'developer-guide/troubleshooting',
+        'developer-guide/quality',
       ],
     },
     'reference/operations',
+    'technical-blog',
   ],
 };
