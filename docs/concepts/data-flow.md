@@ -24,11 +24,13 @@ PostgreSQL
 
 1. The user fills the form in `UtilisateurUI`.
 2. The controller receives the save action.
-3. The controller validates the data.
-4. The service calls the database operation.
+3. The controller validates the data and calls the service.
+4. The service delegates to the DAO.
 5. The DAO creates an `EntityManager`.
 6. JPA persists the `Utilisateur` entity.
 7. PostgreSQL stores the record.
+
+This flow is consistent with the actual controller and DAO implementation in the project.
 
 ## Example: list users
 

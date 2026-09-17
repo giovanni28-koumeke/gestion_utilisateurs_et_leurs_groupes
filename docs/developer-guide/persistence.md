@@ -54,6 +54,8 @@ The application uses a mix of:
 - `em.remove()`
 - native SQL queries via `createNativeQuery()`
 
+This is consistent with the actual DAO implementation in the project.
+
 ## Important note
 
 This project uses raw native queries in addition to JPA entity operations. This is valid in the current code but is not necessarily the most robust long-term pattern for a larger application.

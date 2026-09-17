@@ -72,3 +72,16 @@ JPA configuration:
 ## Notes
 
 This structure is compact and intentionally simple. The project is not intended to be a multi-module application or a SaaS architecture. It is a teaching-oriented CRUD application showing how JPA can be used with Swing and PostgreSQL.
+
+## What is already implemented
+
+From the source code, the project matches the following structure and responsibilities:
+
+- entity mapping and persistence metadata in `src/entite`
+- database access logic in `src/dao`
+- the controller logic in `src/presentation/controleur`
+- Swing UI forms in `src/presentation/vue`
+- runtime startup in `src/jpa/Jpa.java`
+- JPA configuration in `src/META-INF/persistence.xml`
+
+This is the architecture actually present in the repository and should be used as the reference for the project documentation.

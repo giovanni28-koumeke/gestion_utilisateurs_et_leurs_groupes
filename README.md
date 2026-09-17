@@ -127,6 +127,21 @@ src/
 └── ...
 ```
 
+## Audit summary
+
+The project was reviewed directly from the source code and configuration files before the documentation was written.
+
+### Verified findings
+
+- The application is a Java Swing desktop application.
+- The entry point is `jpa.Jpa`.
+- The persistence layer is based on JPA and `EntityManager`.
+- PostgreSQL is configured locally on `localhost:5432`.
+- The configured database name is `jpa`.
+- The relationship is implemented as `ManyToOne` from `Utilisateur` to `Groupe`.
+- The project exposes CRUD flows through the desktop UI, not through a REST API.
+- No custom web layer or authentication system is present in the current implementation.
+
 ## License
 
 The project header indicates NetBeans default licensing, but no explicit custom license file was found in the repository.

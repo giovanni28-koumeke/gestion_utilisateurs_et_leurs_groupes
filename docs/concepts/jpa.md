@@ -53,6 +53,14 @@ They are marked with annotations such as:
 
 The `Utilisateur` entity maps to the `id_groupe` foreign key, establishing the relationship between a user and their group.
 
+The actual mapping is implemented with:
+
+```java
+@ManyToOne
+@JoinColumn(name = "id_groupe")
+private Groupe groupe;
+```
+
 ## Note
 
 The project uses EclipseLink as the provider and PostgreSQL as the database backend, which is consistent with the libraries and persistence configuration present in the project.

@@ -85,6 +85,16 @@ This structure separates responsibilities and makes the project easier to unders
 - the DAO interacts with persistence
 - the entity models the database record
 
+## Verified implementation in the project
+
+The actual code confirms this layered flow:
+
+- Swing views are implemented under `src/presentation/vue`
+- controller logic is implemented under `src/presentation/controleur`
+- service logic is implemented under `src/service`
+- persistence operations are implemented under `src/dao`
+- entity mappings are implemented under `src/entite`
+
 ## Important note
 
 The project is a teaching example, so the separation is intentionally simple and not fully production-optimized.

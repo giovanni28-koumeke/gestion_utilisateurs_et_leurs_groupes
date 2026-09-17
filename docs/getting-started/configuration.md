@@ -10,6 +10,8 @@ The configuration declares the following persistence unit:
 - transaction type: `RESOURCE_LOCAL`
 - provider: `org.eclipse.persistence.jpa.PersistenceProvider`
 
+This configuration was validated directly in the source file [src/META-INF/persistence.xml](../../src/META-INF/persistence.xml).
+
 ## Entity registration
 
 The persistence unit explicitly registers the following entity classes:

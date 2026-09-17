@@ -32,3 +32,20 @@ This is modeled as a `ManyToOne` relation from `Utilisateur` to `Groupe`.
 ## Scope
 
 This project is limited to a desktop application and does not expose a REST API or a web application. The persistence layer is managed directly through `EntityManager` and JPA queries.
+
+## Documentation scope
+
+This documentation is intentionally based on the real implementation present in the repository. It describes the current Java Swing UI, the JPA persistence layer, and the PostgreSQL configuration as they are implemented in the source code.
+
+## Audit status
+
+The project was validated against the actual code structure before writing the technical documentation. The main verified components are:
+
+- entity classes in `src/entite`
+- DAO classes in `src/dao`
+- service classes in `src/service`
+- controller classes in `src/presentation/controleur`
+- Swing views in `src/presentation/vue`
+- persistence configuration in `src/META-INF/persistence.xml`
+
+This documentation therefore reflects the current state of the project rather than a hypothetical architecture.

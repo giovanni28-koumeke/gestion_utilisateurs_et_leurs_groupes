@@ -23,7 +23,7 @@ module.exports = {
     {
       type: 'category',
       label: 'Tutorials',
-      items: ['tutorials/create-user'],
+      items: ['tutorials/create-group', 'tutorials/create-user'],
     },
     {
       type: 'category',

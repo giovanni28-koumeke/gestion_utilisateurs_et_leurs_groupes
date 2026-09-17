@@ -6,10 +6,26 @@ This project is already structured as a NetBeans Java project. No package manage
 
 1. Open NetBeans.
 2. Open the project folder containing the project files.
-3. Confirm that the lib folder contains the required JAR files.
+3. Confirm that the `lib` folder contains the required JAR files.
 4. Confirm the project is recognized as a Java project.
 5. Ensure PostgreSQL is running locally.
 6. Verify that the database `jpa` exists and is reachable.
+7. Open the project and resolve any Java configuration warnings if NetBeans prompts for them.
+
+## Verified project structure
+
+The project is structured as a classic NetBeans Java desktop application:
+
+```text
+src/
+├── dao/
+├── entite/
+├── jpa/
+├── META-INF/
+├── presentation/
+├── service/
+└── ...
+```
 
 ## Files relevant to installation
 
