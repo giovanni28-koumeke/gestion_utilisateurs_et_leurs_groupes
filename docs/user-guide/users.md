@@ -25,7 +25,7 @@ The `Utilisateur` entity has a `@ManyToOne` relationship with `Groupe`:
 private Groupe groupe;
 ```
 
-This means each user can be assigned to one group.
+This mapping lets a user reference at most one group. The join column is not declared `nullable = false`, so the entity mapping itself does not require an association.
 
 ## User actions in the current application
 
@@ -50,10 +50,12 @@ The form includes:
 - password
 - group selector
 
-Validation requires:
+The add form validates only these fields:
 
 - last name is not empty
 - identifier is not empty
+
+The first name, password, and selected group are not separately checked by this form. The user controller loads its group list when it is constructed at application startup; restart the application after adding a group if that group should appear in the selector.
 
 ## Modify a user
 
@@ -61,7 +63,7 @@ The application allows selecting an existing user from a list and editing their 
 
 ## Delete a user
 
-A selected user can be deleted through the controller and service stack.
+A selected user can be deleted through the controller and service stack. If a database operation fails, the controller's catch block writes a generic message to standard output; it does not show the underlying database error in a dialog.
 
 ## List users
 
@@ -74,4 +76,4 @@ Users are listed in a Swing table showing:
 
 ## Important note
 
-The `mot_de_passe` field is stored as a string in the JPA entity. The project does not define a hashing mechanism or password policy in the current implementation.
+The `mot_de_passe` field is stored as a string in the JPA entity and the UI uses a password input control. The project does not define hashing, authentication, or a password policy. Do not use real credentials with this application.

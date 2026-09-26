@@ -1,6 +1,6 @@
 # First launch
 
-This guide explains the first run of the Swing application as implemented in the current codebase.
+This guide describes how to start the Swing application for the first time.
 
 ## Launch from NetBeans
 
@@ -36,11 +36,11 @@ The home interface is defined in [src/presentation/vue/AcceuilUI.java](../../src
 
 When the application starts, the JPA persistence unit is initialized through `Persistence.createEntityManagerFactory("jpaPU")` and the database is accessed through `EntityManager` objects from the DAO layer.
 
-If the database schema is missing, the configured `create` action can generate tables automatically.
+The `create` action requests schema creation by the persistence provider. The PostgreSQL database and role must already exist. Use an empty, disposable database because this setting does not promise to preserve existing schema data.
 
 ## Expected result
 
-If the database connection and project dependencies are correctly configured, the application opens the home screen and allows CRUD operations through Swing dialogs and forms.
+If startup succeeds, the application opens the home screen. The available CRUD flows use Swing forms and dialogs; some other service methods remain incomplete and are not exposed through this screen.
 
 ## Troubleshooting first launch
 
@@ -52,6 +52,4 @@ If the application does not launch:
 - confirm the JAR files in the lib directory are present
 - verify NetBeans sees the project as a Java application
 
-## Important note
-
-This documentation reflects the actual implementation present in the repository. No web interface or REST API is present in the current application.
+The application is a desktop client; it does not provide a web interface or REST API.

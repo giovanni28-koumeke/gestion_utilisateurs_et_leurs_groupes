@@ -23,7 +23,11 @@ module.exports = {
     {
       type: 'category',
       label: 'Tutorials',
-      items: ['tutorials/create-group', 'tutorials/create-user'],
+      items: [
+        'tutorials/quickstart-30-min',
+        'tutorials/create-group',
+        'tutorials/create-user',
+      ],
     },
     {
       type: 'category',
@@ -41,11 +45,16 @@ module.exports = {
       items: [
         'developer-guide/project-structure',
         'developer-guide/persistence',
+        'developer-guide/workflows',
+        'developer-guide/sme-interview',
         'developer-guide/troubleshooting',
         'developer-guide/quality',
       ],
     },
     'reference/operations',
+    'reference/api-documentation',
+    'case-study',
+    'final-presentation',
     'technical-blog',
   ],
 };

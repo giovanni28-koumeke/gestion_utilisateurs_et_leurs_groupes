@@ -1,6 +1,6 @@
 # Groups
 
-The project includes a complete group management flow through the desktop UI.
+The desktop home screen provides group add, list, modify, and delete actions. These flows are implemented in the current Swing application; they are not HTTP operations.
 
 ## What a group represents
 
@@ -37,7 +37,7 @@ The form contains:
 - description field
 - save button
 
-The validation logic checks that the group name is not empty:
+When adding a group, the form rejects an empty or whitespace-only name:
 
 ```java
 return !nom.getText().trim().isEmpty();
@@ -45,13 +45,13 @@ return !nom.getText().trim().isEmpty();
 
 ## Update a group
 
-The application allows selecting an existing group and then opening a form to edit it.
+The application allows selecting an existing group and then opening a form to edit it. Unlike the add flow, the modify flow does not call `champValide()` before persisting; do not assume it applies the same non-empty-name check.
 
 The controller obtains the list of groups and then calls `GroupeUI.selectionerGroupe(...)` to let the user pick a group before updating it.
 
 ## Delete a group
 
-The user selects a group from the list and the project calls the DAO service to delete the selected entity.
+The user selects a group and the controller asks the service/DAO to delete it. If users still reference that group, the database foreign-key constraint can reject the deletion. The controller catches exceptions and writes a generic message to standard output rather than presenting the database error in a dialog.
 
 ## List groups
 

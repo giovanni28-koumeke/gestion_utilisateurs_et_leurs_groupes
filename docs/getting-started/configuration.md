@@ -38,7 +38,7 @@ The project uses:
 <property name="jakarta.persistence.schema-generation.database.action" value="create"/>
 ```
 
-This means the application is configured to generate database tables automatically on startup if they do not already exist.
+This requests schema creation by the persistence provider. It does not create the PostgreSQL database or role and is not a migration strategy. Do not point this configuration at a database whose existing data must be preserved.
 
 ## Logging settings
 

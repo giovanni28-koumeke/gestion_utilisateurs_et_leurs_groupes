@@ -1,6 +1,6 @@
 # CRUD operations
 
-The project implements basic CRUD flows for both entities through a desktop Swing interface.
+The home screen wires add, list, modify, and delete flows for both entities through a desktop Swing interface. The corresponding DAO methods exist, but this does not mean every service method in the project is implemented.
 
 ## Supported operations
 
@@ -10,15 +10,15 @@ The application creates a new `Groupe` or `Utilisateur` through the correspondin
 
 ### Read
 
-The application can load records by ID through DAO methods such as `Trouver(int id)` and also list all records using the `...TrouverGroupes()` and `trouverUtilisateurs()` methods.
+The DAO layer has `Trouver(int id)` methods, but the home screen does not expose a find-by-ID action. The UI listing flows use `GroupeService.TrouverGroupes()` and `UtilisateurService.trouverUtilisateurs()`.
 
 ### Update
 
-The user selects the record to modify and changes the values in the form. The controller then calls the service method to update the persisted entity.
+The user selects a record and changes values in the form. The controller calls the service method to update it. The group modification flow does not perform the same non-empty-name validation as group creation.
 
 ### Delete
 
-The project deletes selected records using the DAO `Supprimer(...)` methods.
+The project passes selected records to the DAO `Supprimer(...)` methods. Deleting a group that is still referenced by users can fail due to the database foreign-key constraint.
 
 ## Example flow for a user
 
@@ -49,4 +49,4 @@ The project deletes selected records using the DAO `Supprimer(...)` methods.
 
 ## Important limitation
 
-This project is focused on database persistence and desktop interactions. It does not define RESTful endpoints or a formal API specification.
+Methods such as `GroupeService.lister()`, `UtilisateurService.lister()`, identifier-based user lookup, and some identifier-based delete methods return `null` or have empty bodies. They are not the listing flows used by the home screen. This project does not define REST endpoints or a formal HTTP API.

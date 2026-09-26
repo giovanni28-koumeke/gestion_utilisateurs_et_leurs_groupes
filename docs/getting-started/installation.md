@@ -1,76 +1,47 @@
 # Installation
 
-This project is already structured as a NetBeans Java project. No package manager or build system such as Maven or Gradle is used in the current configuration.
+Install the desktop application from this NetBeans Java Ant project. The project targets Java 21 and uses the JAR dependencies already tracked in `lib/`; it does not use Maven or Gradle.
 
-## Step-by-step installation
+## 1. Install the prerequisites
 
-1. Open NetBeans.
-2. Open the project folder containing the project files.
-3. Confirm that the `lib` folder contains the required JAR files.
-4. Confirm the project is recognized as a Java project.
-5. Ensure PostgreSQL is running locally.
-6. Verify that the database `jpa` exists and is reachable.
-7. Open the project and resolve any Java configuration warnings if NetBeans prompts for them.
+Install JDK 21, NetBeans with Java Ant project support, and PostgreSQL. See [Prerequisites](./prerequisites.md) for the project settings.
 
-## Verified project structure
+## 2. Create the PostgreSQL role and database
 
-The project is structured as a classic NetBeans Java desktop application:
+Connect to PostgreSQL as an administrator. If the role and database do not already exist, execute these statements separately:
 
-```text
-src/
-├── dao/
-├── entite/
-├── jpa/
-├── META-INF/
-├── presentation/
-├── service/
-└── ...
+```sql
+CREATE ROLE jpa LOGIN PASSWORD 'jpa';
+CREATE DATABASE jpa OWNER jpa;
 ```
 
-## Files relevant to installation
+If either object already exists, inspect its permissions rather than running the matching `CREATE` statement again. The values are local demonstration credentials from `src/META-INF/persistence.xml`; change them before using any non-disposable database.
 
-The following project files are important:
+## 3. Open the project in NetBeans
 
-- nbproject/project.properties
-- src/META-INF/persistence.xml
-- lib/
+1. Open NetBeans and choose **File > Open Project**.
+2. Select the repository root containing `build.xml` and `nbproject/`.
+3. Confirm that NetBeans recognizes the project and resolves the JAR files in `lib/`.
+4. Select a JDK 21 installation for the project if NetBeans reports a different platform.
 
-## Java configuration
+The configured main class is `jpa.Jpa`, as declared in the NetBeans project properties.
 
-The project configuration specifies the following build and runtime parameters:
+## 4. Check the persistence settings
 
-- source compatibility: Java 21
-- main class: jpa.Jpa
+The persistence unit is `jpaPU` in `src/META-INF/persistence.xml`. Its JDBC URL is `jdbc:postgresql://localhost:5432/jpa`, with role `jpa` and the demonstration password `jpa`.
 
-These values are defined in the NetBeans project properties.
+The schema action is `create`. It does not create the PostgreSQL role or database, and it is not a migration mechanism. Use a disposable database with no data to preserve; do not assume existing tables or records will be kept.
 
-## Dependency check
+## 5. Run the application
 
-The project depends on the following libraries:
+In NetBeans, run the project using the configured main class. The home window should present buttons for group and user operations. To try a user workflow, first create at least one group.
 
-```text
-lib/
-├── eclipselink-4.0.4.jar
-├── jakarta.persistence-api-3.2.0.jar
-└── postgresql-42.7.11.jar
-```
+## Bundled dependencies
 
-If one of these libraries is missing, JPA or database connectivity may fail.
+The project currently contains:
 
-## Local database check
+- `lib/eclipselink-4.0.4.jar`
+- `lib/jakarta.persistence-api-3.2.0.jar`
+- `lib/postgresql-42.7.11.jar`
 
-Before running the application, verify the PostgreSQL instance is reachable with the configured credentials:
-
-- database: jpa
-- user: jpa
-- password: jpa
-
-The project configuration points to:
-
-```text
-jdbc:postgresql://localhost:5432/jpa
-```
-
-## Result
-
-If the database is running and the project dependencies are available, the application can be launched in NetBeans.
+If NetBeans reports unresolved libraries, verify that these files exist and inspect `nbproject/project.properties`. The project properties include absolute library paths from another development environment as well as relative paths into `lib/`; on a different machine, resolve the project classpath to the bundled JAR files.

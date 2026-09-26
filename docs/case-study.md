@@ -2,7 +2,7 @@
 
 ## Problem statement
 
-The project is a small Java desktop application designed to manage groups and users in a PostgreSQL database through JPA. The central challenge was to document the existing implementation clearly and accurately without inventing missing features or behaviors.
+The project is a small Java desktop application for managing groups and users in PostgreSQL through JPA. The documentation challenge was to explain its layered persistence workflow while accounting for incomplete service methods and the absence of a network API.
 
 ## Project selected
 
@@ -33,7 +33,7 @@ The goal was to produce a structured, professional documentation set that explai
 
 ## Analysis of the project
 
-The actual code structure includes:
+The source structure includes:
 
 - entity classes mapped with JPA,
 - DAO classes for database access,
@@ -42,18 +42,11 @@ The actual code structure includes:
 - Swing view classes,
 - a PostgreSQL connection configured in the persistence unit.
 
-This analysis was performed directly from the repository, including the source files and the JPA configuration.
+The application structure and persistence settings are reflected in the source packages and JPA configuration.
 
 ## Documentation strategy
 
-The chosen strategy was to document the project as it exists today, not as an idealized system. This included:
-
-- a clear project overview,
-- user-oriented sections,
-- conceptual documentation,
-- technical reference pages,
-- Docusaurus-based structure,
-- a troubleshooting section based on real configuration issues.
+The documentation describes the implemented desktop workflows, JPA configuration, entity relationship, and known limitations. It is organized into user guidance, developer information, concepts, troubleshooting, and reference material, and is published as a Docusaurus site.
 
 ## Tools used
 
@@ -66,21 +59,15 @@ The chosen strategy was to document the project as it exists today, not as an id
 
 ## Difficulties encountered
 
-The main difficulty was avoiding unsupported assumptions. Some service methods are incomplete or return `null`, and the project is a desktop application rather than a REST API. This required careful phrasing and disciplined documentation based on real implementation.
+Some service methods are incomplete or return `null`, and the project is a desktop application rather than a REST API. The documentation therefore distinguishes operations available through the interface from incomplete methods and describes the Java persistence layer without presenting it as a network service.
 
 ## Solutions applied
 
-The solution was to:
-
-- rely on the actual source code,
-- document only implemented features,
-- keep the architecture description aligned with the package structure,
-- use a Docusaurus structure for professional publication,
-- separate conceptual documentation from user documentation.
+The resulting documentation separates user workflows, developer procedures, conceptual explanations, and method-level reference. Its architecture descriptions follow the package structure, and its operation guides distinguish working interface flows from incomplete service methods.
 
 ## Results
 
-The documentation now provides a coherent view of:
+The resulting documentation covers:
 
 - startup and configuration,
 - CRUD operations,

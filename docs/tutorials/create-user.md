@@ -33,14 +33,16 @@ Complete the following fields:
 - Mot de passe
 - Groupe
 
-The current implementation validates the following conditions:
+The add form validates only the following conditions:
 
 - the last name is not empty
 - the identifier is not empty
 
+The first name and password are not required by the form's validation. The group selection also has no separate validation check.
+
 ## 5. Select the group
 
-The form includes a combo box listing the available groups. The selected group is assigned to the user via the `Groupe` field of the `Utilisateur` entity.
+The form includes a combo box populated with the group list loaded when the user controller starts. If you created a group after launching the application, close and restart the application before opening this form so the new group appears. The selected group is assigned to the `groupe` field of `Utilisateur`.
 
 ## 6. Save the user
 
@@ -55,7 +57,7 @@ At this point:
 
 ## 7. Verify the result
 
-After saving, the form closes and the user data is stored in PostgreSQL. The project can then be checked by listing the users from the home screen.
+After a successful save, the form closes. Return to the home screen and choose **Lister tous les utilisateurs** to check the result. The project does not show a dedicated success confirmation.
 
 ## Result
 
@@ -69,4 +71,4 @@ The user is now stored with:
 
 ## Important note
 
-This tutorial reflects the actual behavior of the current implementation. The project does not currently include a dedicated web form, API layer, or authentication flow.
+This tutorial reflects the current implementation. The project does not include a web form, API layer, authentication flow, password hashing, or password policy. Do not enter real credentials.

@@ -4,7 +4,7 @@ sidebar_position: 4
 
 # Documentation quality checklist
 
-This checklist is intended to validate the quality of the project documentation before final delivery. It is based on the real content of the repository and should be applied manually during review.
+Use this checklist when reviewing project documentation for accuracy, usability, accessibility, and publication readiness.
 
 ## 1. Structure and hierarchy
 
@@ -50,14 +50,9 @@ This checklist is intended to validate the quality of the project documentation 
 
 ## 7. Publication review
 
-Before closing the project documentation, verify that:
+Before publication, verify that:
 
-- the site still builds locally,
-- the sidebar lists the expected pages,
-- the introduction reflects the actual project state,
-- the user guide matches the implemented CRUD flows,
-- the troubleshooting section is limited to realistic issues.
-
-## Important note
-
-This checklist should be used as a review guide. No accessibility audit was carried out automatically in this project, so the checklist is the recommended manual validation step before final publication.
+- the site builds locally,
+- the sidebar links to the intended pages,
+- the introduction and user guide match the application,
+- troubleshooting steps address observed configuration and runtime behavior.

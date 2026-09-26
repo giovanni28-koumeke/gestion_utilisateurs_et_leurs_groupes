@@ -48,7 +48,7 @@ These classes provide persistence operations such as:
 
 ## Service layer
 
-The service layer sits between controllers and DAOs. It wraps DAO calls and offers a business-friendly interface for the rest of the application.
+The service layer sits between controllers and DAOs. Implemented methods delegate to DAO calls; several additional service methods are empty or return `null` and must not be treated as available behavior.
 
 Examples:
 
@@ -109,7 +109,7 @@ flowchart TD
     H[Groupe Entity] --> D
 ```
 
-This diagram reflects the implementation visible in the project structure and confirms the desktop flow used by the application.
+This diagram summarizes the layered flow used by the wired home-screen operations. It does not imply that every method in the service classes is implemented.
 
 ## Important note
 

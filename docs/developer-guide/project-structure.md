@@ -84,4 +84,4 @@ From the source code, the project matches the following structure and responsibi
 - runtime startup in `src/jpa/Jpa.java`
 - JPA configuration in `src/META-INF/persistence.xml`
 
-This is the architecture actually present in the repository and should be used as the reference for the project documentation.
+This package layout defines the application's current architecture and the responsibilities of its source modules.

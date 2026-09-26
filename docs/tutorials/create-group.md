@@ -1,6 +1,6 @@
 # Tutorial: create a new group
 
-This tutorial uses the real functionality currently implemented in the project.
+This tutorial uses the group-add flow wired into the current Swing application.
 
 ## 1. Prepare the application
 
@@ -47,7 +47,7 @@ At this point:
 
 ## 6. Verify the result
 
-After saving, the form closes and the group is stored in PostgreSQL. The project can then be checked by listing the groups from the home screen.
+After a successful save, the form closes. Return to the home screen and choose **Lister tous les groupes** to check the result. The project does not show a dedicated success confirmation.
 
 ## Result
 
@@ -55,6 +55,10 @@ The group is now stored with:
 
 - a name
 - a description
+
+## Limitation
+
+The group modification action does not apply the add form's non-empty-name validation. Deleting a group that is still referenced by a user can fail at the database foreign-key constraint; the current controller does not display that underlying database error.
 
 ## Important note
 

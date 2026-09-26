@@ -18,7 +18,7 @@ The persistence unit registers two entities:
 - `Groupe`
 - `Utilisateur`
 
-The current configuration sets schema generation to `create`, so the tables are created automatically if they do not exist.
+The current configuration sets schema generation to `create`, which requests schema creation by the persistence provider. It does not create the PostgreSQL role or database and is not a migration strategy. Existing schema data must not be assumed to be preserved.
 
 ## Observed database model
 
@@ -49,8 +49,8 @@ Fields include:
 
 The `utilisateurs` table includes a foreign key column named `id_groupe` pointing to the `groupe` table.
 
-This is consistent with the `@ManyToOne` relationship defined in the `Utilisateur` class.
+This corresponds to the `@ManyToOne` relationship defined in `Utilisateur`. The join column is not declared non-null in the entity mapping.
 
 ## Important note
 
-The database is configured for local development only. No production database configuration or migration system was detected in the current repository.
+The persistence file contains local demonstration credentials in plain text. No production database configuration or migration system was detected in the current repository.

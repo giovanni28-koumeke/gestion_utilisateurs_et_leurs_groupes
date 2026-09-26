@@ -4,13 +4,15 @@
   "version": "1.0.0",
   "scripts": {
     "start": "docusaurus start",
-    "build": "docusaurus build",
-    "serve": "docusaurus serve",
-    "deploy": "docusaurus deploy"
+    "build": "docusaurus build --out-dir docusaurus-build",
+    "serve": "docusaurus serve --dir docusaurus-build",
+    "deploy": "docusaurus deploy --out-dir docusaurus-build"
   },
   "dependencies": {
     "@docusaurus/core": "3.10.2",
     "@docusaurus/preset-classic": "3.10.2",
+    "@docusaurus/theme-mermaid": "3.10.2",
+    "@mermaid-js/layout-elk": "0.1.9",
     "clsx": "2.1.0",
     "react": "18.3.1",
     "react-dom": "18.3.1"

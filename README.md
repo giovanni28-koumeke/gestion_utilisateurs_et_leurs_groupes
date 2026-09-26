@@ -1,104 +1,88 @@
-# jpa
+# Groups and Users Management
 
-## Project name
+A Java Swing desktop application for managing groups and users with JPA, EclipseLink, and PostgreSQL. The project demonstrates entity mapping and database persistence in a small NetBeans Java application.
 
-jpa
+## Project Status
 
-## Description
-
-This project is a Java Swing desktop application that manages groups and users using JPA and PostgreSQL. It is a small CRUD example built around a relational model where each user belongs to a group.
-
-## Objective
-
-The application allows a user to create, update, delete, and list groups and users through a Swing interface. The persistence layer is implemented with JPA and an EntityManager connected to a PostgreSQL database.
+This is an educational project and is not intended for production use. The desktop interface connects group and user add, list, update, and delete actions to the DAO layer. Some additional service methods are incomplete. The project does not provide an HTTP API, authentication, or Docker deployment.
 
 ## Features
 
-The application currently implements the following operations:
+- Add, list, update, and delete groups through the Swing interface.
+- Add, list, update, and delete users through the Swing interface.
+- Associate a user with a group through a JPA `ManyToOne` relationship.
+- Find an entity by ID through DAO methods; ID lookup is not available from the main menu.
 
-- Add a group
-- List groups
-- Update a group
-- Delete a group
-- Add a user
-- List users
-- Update a user
-- Delete a user
-- Find a group or user by ID
+Some service methods not used by these interface flows remain incomplete. See the [operations reference](docs/reference/operations.md) and [troubleshooting guide](docs/developer-guide/troubleshooting.md).
 
-## Technologies used
+## Technology
 
-- Java 21 (defined in NetBeans project settings)
-- Swing for the desktop interface
-- Jakarta Persistence API (JPA)
-- EclipseLink as the JPA provider
-- PostgreSQL JDBC driver
-- NetBeans IDE
+- Java 21, as configured by the NetBeans project
+- Java Swing
+- Jakarta Persistence API 3.2.0
+- EclipseLink 4.0.4
+- PostgreSQL JDBC driver 42.7.11 and PostgreSQL
+- NetBeans Java project built with Apache Ant
 
-## Architecture
-
-The project follows a simplified MVC-style structure:
-
-- View: Swing forms in the presentation.vue package
-- Controller: classes in presentation.controleur
-- Service: business logic in service
-- DAO: persistence logic in dao
-- Entity: JPA classes in entite
-- Database: PostgreSQL accessed via JPA / EntityManager
+The dependency JAR files are included in `lib/`. The repository does not specify a minimum PostgreSQL or NetBeans version.
 
 ## Prerequisites
 
-Before running the project, ensure the following are available:
+- JDK 21
+- NetBeans IDE with Java Ant project support
+- PostgreSQL available at `localhost:5432`
+- A PostgreSQL database named `jpa` and a role named `jpa` with access to that database
 
-- Java JDK installed
-- NetBeans IDE available
-- PostgreSQL installed locally
-- A PostgreSQL database named jpa exists
-- A PostgreSQL user named jpa with password jpa exists
+The demonstration credentials are stored in plain text in `src/META-INF/persistence.xml`. They are not suitable for production use.
 
-## Installation
+## Installation and Quick Start
 
-1. Open the project in NetBeans.
-2. Confirm the dependencies are available under the lib folder.
-3. Ensure the PostgreSQL database is running locally.
+1. Install JDK 21, NetBeans, and PostgreSQL.
+2. If needed, create the role and database by running these statements separately in `psql` as a PostgreSQL administrator:
+
+   ```sql
+   CREATE ROLE jpa LOGIN PASSWORD 'jpa';
+   CREATE DATABASE jpa OWNER jpa;
+   ```
+
+   If either object already exists, verify its permissions instead of running its `CREATE` statement again.
+3. Open the repository root in NetBeans and verify that the libraries in `lib/` are resolved.
+4. Run the NetBeans project. Its configured main class is `jpa.Jpa`.
+5. Use the home-screen buttons to open the group and user forms and lists.
+
+The JPA configuration uses `jdbc:postgresql://localhost:5432/jpa` and sets `schema-generation.database.action` to `create`. This is not a migration mechanism and does not guarantee preservation of existing data. Use a disposable database with no data to preserve.
+
+See the [30-minute quickstart](docs/tutorials/quickstart-30-min.md) for a guided group-and-user workflow.
+
+## Docusaurus Documentation Site
+
+The documentation site uses Node.js and npm. From the repository root, install the locked dependencies and start the development server:
+
+```powershell
+npm ci
+npm run start
+```
+
+Build and serve the production site locally with:
+
+```powershell
+npm run build
+npm run serve
+```
+
+The GitHub Actions workflow uses Node.js 20. The generated site is written to `docusaurus-build/`, separate from NetBeans' `build/` directory. `npm run deploy` publishes the site and requires a configured GitHub repository and deployment credentials.
 
 ## Configuration
 
-The database configuration is defined in src/META-INF/persistence.xml.
+| Setting | Current value | Source |
+|---|---|---|
+| Persistence unit | `jpaPU` | `src/META-INF/persistence.xml` |
+| Transaction type | `RESOURCE_LOCAL` | `src/META-INF/persistence.xml` |
+| JDBC URL | `jdbc:postgresql://localhost:5432/jpa` | `src/META-INF/persistence.xml` |
+| Database user and password | `jpa` / `jpa` | Plain-text demonstration values in `src/META-INF/persistence.xml` |
+| Schema generation | `create` | JPA provider schema generation; not a migration |
 
-The project is configured with:
-
-- persistence unit name: jpaPU
-- JDBC driver: org.postgresql.Driver
-- URL: jdbc:postgresql://localhost:5432/jpa
-- username: jpa
-- password: jpa
-- schema-generation.database.action: create
-
-This means the project is configured to generate database tables automatically if they do not exist yet.
-
-## Launch
-
-The project is configured in NetBeans with the main class:
-
-- jpa.Jpa
-
-To run it:
-
-1. Open the project in NetBeans.
-2. Right-click the project.
-3. Select Run.
-
-## Quick usage
-
-After launch:
-
-1. Use the home screen to add or list groups.
-2. Use the home screen to add or list users.
-3. A user can be assigned to an existing group.
-4. The application stores the data in PostgreSQL through JPA.
-
-## Project structure
+## Project Structure
 
 ```text
 src/
@@ -121,31 +105,18 @@ src/
 │       ├── AcceuilUI.java
 │       ├── GroupeUI.java
 │       └── UtilisateurUI.java
-├── service/
-│   ├── GroupeService.java
-│   └── UtilisateurService.java
-└── ...
+└── service/
+    ├── GroupeService.java
+    └── UtilisateurService.java
 ```
 
-## Audit summary
+## Contributing
 
-The project was reviewed directly from the source code and configuration files before the documentation was written.
-
-### Verified findings
-
-- The application is a Java Swing desktop application.
-- The entry point is `jpa.Jpa`.
-- The persistence layer is based on JPA and `EntityManager`.
-- PostgreSQL is configured locally on `localhost:5432`.
-- The configured database name is `jpa`.
-- The relationship is implemented as `ManyToOne` from `Utilisateur` to `Groupe`.
-- The project exposes CRUD flows through the desktop UI, not through a REST API.
-- No custom web layer or authentication system is present in the current implementation.
+1. Create a branch from `main`.
+2. Keep changes focused and update the documentation when documented behavior changes.
+3. For documentation changes, run `npm ci` and `npm run build`. For Java changes, compile and test the project in NetBeans against a disposable database.
+4. Submit a pull request describing the change and the checks performed.
 
 ## License
 
-The project header indicates NetBeans default licensing, but no explicit custom license file was found in the repository.
-
-## Notes
-
-This project is a practical JPA and Swing CRUD exercise. It demonstrates persistence between Java entities and a PostgreSQL database with a direct Java desktop interface.
+No license file or explicit license declaration is included in the repository. Reuse and redistribution terms are therefore not specified.

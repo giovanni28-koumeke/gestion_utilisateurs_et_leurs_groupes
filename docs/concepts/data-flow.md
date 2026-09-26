@@ -9,7 +9,7 @@ Utilisateur
    ↓
 Vue Swing
    ↓
-Contrôleur
+Controller
    ↓
 Service
    ↓
@@ -24,7 +24,7 @@ PostgreSQL
 
 1. The user fills the form in `UtilisateurUI`.
 2. The controller receives the save action.
-3. The controller validates the data and calls the service.
+3. The controller validates the fields checked by the form and calls the service. For user creation these are the name and identifier; group creation checks the group name.
 4. The service delegates to the DAO.
 5. The DAO creates an `EntityManager`.
 6. JPA persists the `Utilisateur` entity.
@@ -48,4 +48,4 @@ em.createNativeQuery("SELECT * FROM utilisateurs", Utilisateur.class)
 
 ## Real implementation notes
 
-This is a simple application and not a full enterprise flow. Certain methods return null or are intentionally left empty in the service layer, so the conceptual flow matches the code while the business logic remains intentionally minimal.
+This is a simple application and not a full enterprise flow. The home screen's list operations use `TrouverGroupes()` and `trouverUtilisateurs()`. Other service methods, including `lister()`, return `null` or remain empty. The user controller also loads its group list once when it is constructed, so restarting the app refreshes the user-form selector after a group is added.

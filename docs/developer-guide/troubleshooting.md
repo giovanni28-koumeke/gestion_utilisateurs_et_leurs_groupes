@@ -1,6 +1,6 @@
 # Troubleshooting
 
-This section documents the most realistic project issues based on the current configuration and code.
+This guide covers common startup, persistence, and database connection problems.
 
 ## 1. PostgreSQL connection issues
 
@@ -73,14 +73,8 @@ The project is configured with:
 <property name="jakarta.persistence.schema-generation.database.action" value="create"/>
 ```
 
-If this is not respected in the runtime environment, the generated schema may not appear as expected.
+The PostgreSQL database and role must exist before the application starts. The `create` action requests schema creation by the persistence provider; it does not create the database or role and is not a migration mechanism. Use a disposable database with no data to preserve.
 
-## 6. Known limitation in the current project
+## 6. Incomplete service operations
 
-Some service methods are unimplemented or return `null`.
-
-This means some flows may be incomplete from a production perspective and should be reviewed before extending the project.
-
-## Important note
-
-This troubleshooting guide is intentionally limited to issues that are realistic within the current code and configuration. No fictional system failures were introduced.
+Some service methods have empty bodies or return `null`; these methods are not usable application flows. The desktop interface uses the DAO-backed operations listed in the [operations reference](../reference/operations.md).

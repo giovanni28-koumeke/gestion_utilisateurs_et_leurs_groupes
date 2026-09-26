@@ -2,20 +2,21 @@
 const config = {
   title: 'JPA Project Documentation',
   tagline: 'Java Swing, JPA and PostgreSQL project reference',
-  favicon: 'img/favicon.ico',
-
-  url: 'https://your-org.github.io',
-  baseUrl: '/',
-  organizationName: 'your-org',
-  projectName: 'jpa-project',
+  url: 'https://giovanni28-koumeke.github.io',
+  baseUrl: '/gestion_utilisateurs_et_leurs_groupes/',
+  organizationName: 'giovanni28-koumeke',
+  projectName: 'gestion_utilisateurs_et_leurs_groupes',
 
   onBrokenLinks: 'warn',
 
   markdown: {
+    mermaid: true,
     hooks: {
       onBrokenMarkdownLinks: 'warn',
     },
   },
+
+  themes: ['@docusaurus/theme-mermaid'],
 
   i18n: {
     defaultLocale: 'en',
@@ -49,7 +50,7 @@ const config = {
           label: 'Documentation',
         },
         {
-          href: 'https://github.com/your-org/your-repo',
+          href: 'https://github.com/giovanni28-koumeke/gestion_utilisateurs_et_leurs_groupes',
           label: 'GitHub',
           position: 'right',
         },
