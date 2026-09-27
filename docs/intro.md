@@ -23,12 +23,12 @@ The application provides desktop workflows for creating and managing groups and 
 
 ## Relationship model
 
-The real relationship implemented in the code is:
+The business relationship is:
 
 - one group can include many users
-- one user can reference at most one group; the mapping does not require a group
+- every user must belong to one group
 
-This is modeled as a `ManyToOne` relation from `Utilisateur` to `Groupe`.
+The relationship is modeled as a `ManyToOne` relation from `Utilisateur` to `Groupe`. The current mapping and form do not enforce the required group assignment.
 
 ## Scope
 

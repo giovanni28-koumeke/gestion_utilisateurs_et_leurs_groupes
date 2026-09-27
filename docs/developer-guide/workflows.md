@@ -43,9 +43,9 @@ There are no environment-specific persistence profiles in the repository. Do not
 ## Error handling and edge cases
 
 - Controllers currently catch some update/delete exceptions and print generic messages to standard output; they do not consistently present the underlying database cause to users.
-- Deleting a group referenced by a user can fail due to the foreign-key constraint. No cascade behavior is declared on the mapping.
+- The business rule prohibits deleting a group referenced by users. The current DAO relies on the foreign-key constraint to reject the operation and the controller does not provide a clear user-facing explanation. No cascade behavior is declared on the mapping.
 - `UtilisateurControleur` loads its group list during construction. Adding a group after launch does not refresh that list; the UI currently needs an application restart before the new group appears in the user selector.
-- The user form validates name and identifier, but not first name, password, or group selection. Entity/database constraints can still reject persistence.
+- The business rule requires a group assignment, but the user form validates only name and identifier, and the entity mapping permits a nullable group. First name and password are also not validated by the form.
 - DAO list methods use native SQL against `groupe` and `utilisateurs`; changing table names requires updating these queries as well as the entity mappings.
 
 ## Collaboration with technical writers

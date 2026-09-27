@@ -25,7 +25,7 @@ The `Utilisateur` entity has a `@ManyToOne` relationship with `Groupe`:
 private Groupe groupe;
 ```
 
-This mapping lets a user reference at most one group. The join column is not declared `nullable = false`, so the entity mapping itself does not require an association.
+The business rule is that every user must belong to one group. The current mapping permits a nullable association because the join column is not declared `nullable = false`; the form also does not validate group selection. The implementation therefore does not yet enforce this requirement.
 
 ## User actions in the current application
 
@@ -50,20 +50,20 @@ The form includes:
 - password
 - group selector
 
-The add form validates only these fields:
+The business rules require a non-empty name, a non-empty identifier, and a unique identifier. The current add form validates only these fields for non-empty values:
 
 - last name is not empty
 - identifier is not empty
 
-The first name, password, and selected group are not separately checked by this form. The user controller loads its group list when it is constructed at application startup; restart the application after adding a group if that group should appear in the selector.
+The current form and entity mapping do not check that the identifier is unique. The first name and password are not separately checked by this form. Although the business rule requires a group, the form does not validate the selected value. The user controller loads its group list when it is constructed at application startup; restart the application after adding a group if that group should appear in the selector.
 
 ## Modify a user
 
-The application allows selecting an existing user from a list and editing their data, including the assigned group.
+The application allows selecting an existing user from a list and editing their data, including reassigning the user to another group. Saving the form updates the `Utilisateur.groupe` association.
 
 ## Delete a user
 
-A selected user can be deleted through the controller and service stack. If a database operation fails, the controller's catch block writes a generic message to standard output; it does not show the underlying database error in a dialog.
+A selected user can be deleted through the controller and service stack. The expected behavior is to show an appropriate on-screen error when an operation fails. The current controller instead writes a generic message to standard output and does not show the underlying database error in a dialog.
 
 ## List users
 

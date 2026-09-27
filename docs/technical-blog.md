@@ -18,7 +18,7 @@ The project has two JPA entities. `Groupe` maps to the `groupe` table and `Utili
 private Groupe groupe;
 ```
 
-This means a user can reference at most one group; the mapping does not declare the join column non-null. There is no cascade setting on the association. Consequently, the database can reject deletion of a group that is still referenced by users. These are not UI preferences: they follow from the entity mapping and foreign-key behavior.
+This means a user can reference at most one group; the mapping does not declare the join column non-null. The business rule requires every user to have a group, so the current mapping does not enforce the requirement. There is no cascade setting on the association. The business rule prohibits deleting a group that still has users; the database foreign-key constraint rejects that deletion, but the current controller does not give a clear explanation. These behaviors follow from the entity mapping and controller implementation.
 
 The desktop flow is deliberately layered. `AcceilControleur` connects home-screen buttons to group and user controllers. Those controllers call service classes, which delegate database work to DAOs. The DAOs use `EntityManager` against the `jpaPU` persistence unit and a PostgreSQL connection configured in `src/META-INF/persistence.xml`.
 
@@ -68,11 +68,11 @@ Write methods in the DAOs create an `EntityManager`, begin a resource-local tran
 
 ## A better refresh boundary
 
-The current code could be improved by loading the group list when the user opens the add or edit form, rather than storing it for the lifetime of `UtilisateurControleur`. Another design would provide an explicit refresh after group changes. Either change should also define what happens when the list is empty and when a selected group has been deleted.
+The current code could be improved by loading the group list when the user opens the add or edit form, rather than storing it for the lifetime of `UtilisateurControleur`. Another design would provide an explicit refresh after group changes. The form should also present an appropriate state when no groups are available.
 
-These are recommendations, not current behavior. Before implementing one, clarify whether a user is allowed to have no group. The JPA mapping allows a nullable association, but the interface and product requirement may intend a stronger rule. If a group is mandatory, enforce that rule in the UI and persistence model rather than relying on a non-empty combo box by accident.
+These are recommendations, not current behavior. Because group assignment is mandatory, the form should prevent saving a user without a selected group, and the persistence mapping should enforce the same rule. Relying on a non-empty combo box alone would not protect other code paths.
 
-Similarly, a group deletion should have a defined outcome when users reference it: reject it with a clear explanation, require reassignment, or use an explicitly approved cascade policy. The current relationship has no cascade, and silently adding one would change data semantics.
+The deletion rule is also defined: a group with assigned users must not be deleted. The application should detect this condition and explain the restriction before attempting deletion. The current relationship has no cascade, and adding one would conflict with the confirmed rule by changing data semantics.
 
 ## Practical debugging checklist
 

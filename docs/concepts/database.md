@@ -49,7 +49,9 @@ Fields include:
 
 The `utilisateurs` table includes a foreign key column named `id_groupe` pointing to the `groupe` table.
 
-This corresponds to the `@ManyToOne` relationship defined in `Utilisateur`. The join column is not declared non-null in the entity mapping.
+This corresponds to the `@ManyToOne` relationship defined in `Utilisateur`. The business rule requires every user to have a group, but the join column is not declared non-null in the current entity mapping; the database mapping therefore does not enforce that requirement.
+
+The business rule also prohibits deleting a group while users are assigned to it. The foreign-key constraint prevents that deletion at the database level, although the current controller does not provide a clear user-facing explanation when the database rejects it.
 
 ## Important note
 

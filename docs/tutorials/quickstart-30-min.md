@@ -62,7 +62,7 @@ Click **Ajouter un groupe**, enter a non-empty group name and an optional descri
 
 Close and run the application again before creating the user. The current controller loads the group list once at application startup; restarting refreshes the list used by the user form.
 
-Click **Ajouter un utilisateur**. Enter a non-empty name and identifier, then select the group created in the previous step. The code does not require a non-empty first name or password, and it does not separately validate that a group is selected. Click **Enregistrer**.
+Click **Ajouter un utilisateur**. Enter a non-empty name and a unique identifier, then select the group created in the previous step, as required by the business rules. The current form checks that the name and identifier are non-empty but does not enforce identifier uniqueness or group selection. The code also does not require a non-empty first name or password. Click **Enregistrer**.
 
 ### 7. List users and verify the result (28–30 minutes)
 
@@ -76,7 +76,7 @@ The group and associated user should be stored in the configured PostgreSQL data
 
 - **The application cannot connect:** confirm the server is listening at `localhost:5432`, the `jpa` database and role exist, and the credentials match `src/META-INF/persistence.xml`.
 - **No group appears in the user selector:** restart the application after creating the group. The current controller caches the group list when it is constructed.
-- **The save action does not accept the form:** group creation requires a name; user creation requires a name and identifier. Other required database constraints or connection errors may still cause persistence to fail.
+- **The save action does not accept the form:** group creation requires a name; user creation requires a name and identifier. The form does not currently check identifier uniqueness. Other database constraints or connection errors may also cause persistence to fail.
 - **Existing data matters:** stop before running the application against it. The configured schema action is `create`, and preservation of existing schema data is not guaranteed.
 
 Additional procedures are available in the [Group guide](../user-guide/groups.md), [User guide](../user-guide/users.md), and [Installation guide](../getting-started/installation.md).

@@ -51,7 +51,7 @@ The controller obtains the list of groups and then calls `GroupeUI.selectionerGr
 
 ## Delete a group
 
-The user selects a group and the controller asks the service/DAO to delete it. If users still reference that group, the database foreign-key constraint can reject the deletion. The controller catches exceptions and writes a generic message to standard output rather than presenting the database error in a dialog.
+The business rule prohibits deleting a group while users are assigned to it. The current controller does not check for assigned users before deletion; it attempts the DAO operation and relies on the database foreign-key constraint to reject deletion. The expected behavior is to show an appropriate on-screen error, but the current controller catches the exception and writes a generic message to standard output instead.
 
 ## List groups
 
